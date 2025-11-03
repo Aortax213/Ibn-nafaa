@@ -1,0 +1,27 @@
+
+:root{
+  --bg:#0B132B; --card:#0f2038; --gold:#C5A365; --muted:#9fb3d9; --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box;font-family:"Tajawal",sans-serif}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#020617);color:#eef6ff}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.02)}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#F3E0B5);display:flex;align-items:center;justify-content:center;color:#051224;font-weight:900;font-size:18px}
+.title{font-weight:900;font-size:16px}
+.subtitle{font-size:12px;color:var(--muted)}
+nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-weight:600}
+main{max-width:980px;margin:18px auto;padding:12px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+h2{margin:0 0 8px 0;color:#fff}
+p.lead{color:var(--muted);margin:0 0 8px 0}
+textarea,input,select{width:100%;padding:12px;border-radius:10px;border:none;background:var(--glass);color:inherit;outline:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{background:linear-gradient(90deg,var(--gold),#FFD99C);border:none;padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:700;color:#051224}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:10px}
+.time-box{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;text-align:center}
+.countdown{font-weight:800;font-size:18px;color:#fff}
+.tasbih-count{font-size:48px;font-weight:900;color:var(--gold)}
+footer{text-align:center;color:var(--muted);padding:16px;margin-top:8px}
+@media(max-width:600px){.row{flex-direction:column}}
