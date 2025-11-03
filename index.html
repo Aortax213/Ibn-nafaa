@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ابن نافع — Ibn Nafaa</title>
+  <meta name="theme-color" content="#071127">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">ب</div>
+      <div>
+        <div class="title">ابن نافع</div>
+        <div class="subtitle">Ibn Nafaa — Quran • Prayer • Azkar</div>
+      </div>
+    </div>
+    <nav aria-label="Main navigation">
+      <a href="#home">الرئيسية</a>
+      <a href="#quran">القرآن</a>
+      <a href="#tasbih">السبحة</a>
+      <a href="#prayer">الصلاة</a>
+      <a href="#quiz">المسابقة</a>
+      <a href="https://www.instagram.com/ibn_nafaa" target="_blank" rel="noopener">@ibn_nafaa</a>
+    </nav>
+  </header>
+  <main>
+    <section id="home" class="card">
+      <h2>صباح الخير — رسالة اليوم</h2>
+      <p id="dailyMessage" class="small">جارٍ التحميل...</p>
+    </section>
+    <section id="quran" class="card">
+      <h2>المصحف الصوتي — Quran Audio</h2>
+      <p class="small">اختر السورة والقارئ ثم اضغط تشغيل.</p>
+      <div class="row" style="margin-top:8px">
+        <select id="surahSelect"></select>
+        <select id="reciterSelect">
+          <option value="saad_alghamdi">سعد الغامدي</option>
+          <option value="aljuhani">الجهني</option>
+        </select>
+        <button id="playSurahBtn" class="btn">تشغيل السورة</button>
+        <button id="loadSurahBtn" class="btn ghost">عرض نص السورة</button>
+      </div>
+      <div id="quranContent" style="margin-top:12px;direction:rtl;max-height:260px;overflow:auto"></div>
+      <audio id="audioPlayer" controls preload="none" style="margin-top:12px"></audio>
+    </section>
+    <section id="tasbih" class="card">
+      <h2>السبحة الاحترافية</h2>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="text-align:center">
+          <div class="tasbih-count" id="tasbihCount">0</div>
+          <div class="small">العدد الحالي</div>
+        </div>
+        <div style="flex:1">
+          <div class="row">
+            <button id="incBtn" class="btn">تسبيح</button>
+            <button id="decBtn" class="btn ghost">نزول</button>
+            <button id="resetBtn" class="btn ghost">إعادة</button>
+            <select id="tasbihTarget" style="width:auto">
+              <option value="33">33</option><option value="99" selected>99</option><option value="100">100</option>
+            </select>
+          </div>
+          <div class="small" style="margin-top:8px">إحصائيات: <span id="weekStats">0 تسبّحات خلال 7 أيام</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="prayer" class="card">
+      <h2>مواقيت الصلاة</h2>
+      <p class="small" id="locationInfo">الموقع: -</p>
+      <div id="timesGrid" class="grid" style="margin-top:8px"></div>
+      <div style="margin-top:10px">المنفلة التالية: <span id="nextCountdown" class="countdown">--:--:--</span> — <span id="nextName">-</span></div>
+    </section>
+    <section id="quiz" class="card">
+      <h2>مسابقة ابن نافع</h2>
+      <div id="quizArea">
+        <button id="startQuizBtn" class="btn">ابدأ الاختبار</button>
+        <div id="quizPlay" style="display:none;margin-top:10px">
+          <div id="questionText" class="quiz-question"></div>
+          <div id="optionsList"></div>
+          <div style="margin-top:12px" class="row">
+            <button id="nextQBtn" class="btn ghost">السؤال التالي</button>
+            <div class="small" style="margin-left:auto">السؤال <span id="qIndex">0</span> / <span id="qTotal">0</span></div>
+          </div>
+        </div>
+        <div id="quizResult" style="display:none;margin-top:10px">
+          <div class="small">نتيجتك: <strong id="scoreVal">0</strong></div>
+          <button id="retryBtn" class="btn">أعد المحاولة</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2025 Ibn Nafaa — Abo Wateen Studio · @ibn_nafaa</footer>
+  <script src="script.js"></script>
+</body>
+</html>
