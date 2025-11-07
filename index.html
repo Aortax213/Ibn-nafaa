@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>مشغل القرآن — سعد الغامدي وعبد الله الجهني</title>
-  <style>
-    :root{
-      --bg:#06101a; --panel:#0d1630; --muted:#9aa6b3; --accent:#f0c26a;
-      --glass: rgba(255,255,255,0.03);
-    }
-    html,body{height:100%;margin:0;font-family: "Cairo",sans-serif;background:linear-gradient(180deg,#02060a 0%, #06101a 100%);color:#fff}
-    .wrap{max-width:820px;margin:28px auto;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 30px rgba(0,0,0,0.6)}
-    h1{margin:0 0 10px;font-size:28px;text-align:center}
-    p.lead{color:var(--muted);text-align:center;margin-top:4px}
-    .controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px}
-    select,button{padding:12px 16px;border-radius:10px;border:0;font-size:16px}
-    select{background:var(--panel);color:#fff;min-width:220px}
-    button{background:var(--accent);color:#071217;font-weight:700;cursor:pointer}
-    .player-box{margin-top:20px;background:var(--glass);padding:16px;border-radius:12px;display:flex;align-items:center;gap:12px}
-    audio{flex:1;width:100%;outline:none}
-    .meta{display:flex;gap:12px;align-items:center}
-    .small{font-size:13px;color:var(--muted)}
-    .logo{font-weight:700;color:var(--accent);letter-spacing:0.6px}
-    .notice{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
-    @media(max-width:520px){ .controls{flex-direction:column;align-items:center} select{min-width:90%} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>مشغل القرآن — سعد الغامدي / عبد الله الجهني</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#05060a; --panel:#0c1220; --muted:#9aa6b3; --accent:#f0c26a;
+    --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:"Cairo",sans-serif;background:linear-gradient(180deg,#03040a 0%, #071423 100%);color:#fff}
+  .container{max-width:960px;margin:28px auto;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+  header{text-align:center}
+  h1{margin:0;font-size:30px}
+  p.lead{color:var(--muted);margin:6px 0 0}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px}
+  .field{min-width:220px}
+  select,button{padding:12px 16px;border-radius:10px;border:0;font-size:16px}
+  select{background:#0f1a2b;color:#fff;min-width:240px}
+  button{background:var(--accent);color:#071217;font-weight:700;cursor:pointer}
+  .player{margin-top:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;display:flex;gap:12px;align-items:center}
+  .logo{
+    width:86px;height:86px;border-radius:12px;flex:0 0 86px;background:linear-gradient(135deg,#071b2a,#102034);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+    box-shadow:0 8px 30px rgba(0,0,0,0.6)
+  }
+  .logo img{width:60%;height:60%}
+  .logo .pulse{position:absolute;inset:0;border-radius:12px;box-shadow:0 0 40px rgba(240,194,106,0.0);transition:box-shadow .18s linear}
+  .meta{flex:1}
+  .meta .title{font-weight:700}
+  .meta .sub{font-size:13px;color:var(--muted);margin-top:6px}
+  audio{width:100%;outline:none}
+  .notice{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
+  .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* small screens */
+  @media(max-width:640px){
+    .controls{flex-direction:column;align-items:center}
+    select{min-width:92%}
+    .logo{width:68px;height:68px}
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>🎧 مشغل القرآن الكريم</h1>
-    <p class="lead">اختر السورة ثم القارئ (سعد الغامدي أو عبد الله الجهني) واضغط تشغيل — يشغّل السورة مباشرة.</p>
+  <div class="container">
+    <header>
+      <h1>🎧 مشغل القرآن الاحترافي</h1>
+      <p class="lead">سعد الغامدي وعبد الله الجهني — اختر السورة ثم اضغط تشغيل. التطبيق يجرب روابط متعددة تلقائياً لضمان التشغيل.</p>
+    </header>
 
-    <div class="controls" aria-hidden="false">
-      <div>
-        <label class="small">السورة:</label><br>
-        <select id="surahSelect" aria-label="اختيار السورة"></select>
+    <div class="controls" role="region" aria-label="عناصر التحكم">
+      <div class="field">
+        <label class="small">السورة</label><br>
+        <select id="surahSelect" aria-label="السورة"></select>
       </div>
 
-      <div>
-        <label class="small">القارئ:</label><br>
-        <select id="reciterSelect" aria-label="اختيار القارئ">
-          <!-- القوائم ستتم تعبئتها تلقائياً، لكن هنا نقيد القارئين -->
-          <option value="13">سعد الغامدي</option>
-          <option value="152">عبد الله الجهني</option>
+      <div class="field">
+        <label class="small">القارئ</label><br>
+        <select id="reciterSelect" aria-label="القارئ">
+          <!-- القيم هنا مجرد معرف داخلي سنستخدمه لاختيار مجموعة أنماط روابط -->
+          <option value="saad">سعد الغامدي</option>
+          <option value="juhani">عبد الله الجهني</option>
         </select>
       </div>
 
@@ -51,146 +70,247 @@
       </div>
     </div>
 
-    <div class="player-box" role="region" aria-label="مشغل الصوت">
-      <div class="meta">
-        <div class="logo">MyQuranPlayer</div>
+    <div class="player" aria-live="polite">
+      <div class="logo" title="شعارك هنا">
+        <!-- ضع لوجوك بصيغة PNG أو استخدم هذا الايقون -->
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23071b2a' /><path d='M20 42 L20 22' stroke='%23f0c26a' stroke-width='3' stroke-linecap='round'/><path d='M28 42 L28 18' stroke='%23f0c26a' stroke-width='3' stroke-linecap='round'/><path d='M36 42 L36 26' stroke='%23f0c26a' stroke-width='3' stroke-linecap='round'/></svg>" alt="logo">
+        <div class="pulse" id="logoPulse"></div>
       </div>
-      <audio id="audioPlayer" controls preload="none"></audio>
+
+      <div class="meta">
+        <div class="title" id="nowTitle">جاهز للتشغيل</div>
+        <div class="sub" id="nowSub">اختر السورة والقارئ ثم اضغط تشغيل</div>
+        <div style="margin-top:10px">
+          <audio id="audioPlayer" controls preload="none"></audio>
+        </div>
+      </div>
     </div>
 
-    <div class="notice" id="notice">تحميل قائمة السور والروابط... انتظر ثانية.</div>
+    <div class="notice" id="notice">تحميل القوائم...</div>
+    <div class="footer">صمم لك بشكل احترافي — وُجد لتسهيل الاستماع</div>
   </div>
 
-  <script>
-  /* 
-    مشغل القرآن المتكامل (يستخدم واجهات MP3Quran لجلب القوائم والملفات)
-    يعمل مع قارئين: Saad al-Ghamdi و Abdullah Al-Juhani
-    ملاحظات: يحتاج اتصال إنترنت لأننا نعتمد على API خارجي وروابط MP3.
-  */
+<script>
+/*
+توضيح الميكانيكا:
+- نملأ قائمة السور (1..114).
+- عند الضغط تشغيل ننتج قائمة روابط مرشحة (candidates) بناءً على القارئ والسورة.
+- نجرب كل رابط تباعًا (نضبط audio.src وننتظر حدث canplay أو error).
+- أول رابط يعمل نستخدمه ونشغّل.
+- هذا يزيد احتمالية التشغيل حتى لو البنية على الخادم مختلفة.
+*/
 
-  const surahSelect = document.getElementById('surahSelect');
-  const reciterSelect = document.getElementById('reciterSelect');
-  const audio = document.getElementById('audioPlayer');
-  const playBtn = document.getElementById('playBtn');
-  const notice = document.getElementById('notice');
+// عناصر DOM
+const surahSelect = document.getElementById('surahSelect');
+const reciterSelect = document.getElementById('reciterSelect');
+const playBtn = document.getElementById('playBtn');
+const audio = document.getElementById('audioPlayer');
+const notice = document.getElementById('notice');
+const nowTitle = document.getElementById('nowTitle');
+const nowSub = document.getElementById('nowSub');
+const logoPulse = document.getElementById('logoPulse');
 
-  // Helper لملء select بالسور من API
-  async function loadSurahs() {
-    try {
-      // API يوفر قائمة السور (mp3quran)
-      const res = await fetch('https://mp3quran.net/api/v3/suwar?language=eng');
-      const json = await res.json();
-      const suwar = json.suwar || json.suwar_list || json;
-      // mp3quran returns array named 'suwar'
-      const list = Array.isArray(suwar) ? suwar : [];
-      // أبسط: إذا لم توجد، نبني الـ114 يدوياً كخيار احتياطي
-      if (list.length === 0) {
-        for (let i=1;i<=114;i++){
-          addSurahOption(i, `سورة رقم ${i}`);
-        }
-      } else {
-        list.forEach(item => {
-          // بعض مصادر تعيد الاسم بالإنجليزية + عربي
-          const num = item.number || item.id || item.index || item.sura || item.surano || item.chapter || item.chapter_number;
-          const name = item.name || item.englishName || item.arabicName || item.ar_name || item.name_en || item.sura_name || `سورة ${num}`;
-          addSurahOption(num, (item.arabicName || item.name_ar || item.name || name));
-        });
+// 1) املأ قائمة السور بالعربية (مختصر أسماء)
+const surahNames = [
+"الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس",
+"هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه",
+"الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم",
+"لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
+"فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق",
+"الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة",
+"الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
+"نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس",
+"التكوير","الإنفطار","المطففين","الإنشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد",
+"الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات",
+"القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر",
+"المسد","الإخلاص","الفلق","الناس"
+];
+// اضافة خيارات
+for(let i=0;i<114;i++){
+  const opt = document.createElement('option');
+  opt.value = String(i+1);
+  opt.textContent = `${surahNames[i]} — ${i+1}`;
+  surahSelect.appendChild(opt);
+}
+
+// 2) إعداد قواعد الروابط (قائمة مرشحة لكل قارئ)
+// نحتفظ بعدة قواعد: cdn.islamic.network (AlQuran CDN)، و mp3quran servers شائعة.
+const patterns = {
+  saad: [
+    // Islamic Network CDN (قد تكون مسميات مختلفة لكن نجرب)
+    'https://cdn.islamic.network/quran/audio-surah/128/ar.saad_alghamdi/{num}.mp3',
+    'https://cdn.islamic.network/quran/audio-surah/128/ar.saad_alghamdi/00{num}.mp3',
+    // mp3quran common servers + candidate folders
+    'https://server11.mp3quran.net/saad_alghamdi/00{num}.mp3',
+    'https://server8.mp3quran.net/saad_alghamdi/00{num}.mp3',
+    'https://server11.mp3quran.net/saad_alghamdi/{num}.mp3',
+    'https://verse.mp3quran.net/arabic/saad_alghamdi/128/{num}.mp3',
+    // fallback to well-known mp3quran folder code (s_gmd)
+    'https://server11.mp3quran.net/s_gmd/00{num}.mp3',
+    'https://server8.mp3quran.net/s_gmd/00{num}.mp3'
+  ],
+  juhani: [
+    'https://cdn.islamic.network/quran/audio-surah/128/ar.abdullah_aljuhani/{num}.mp3',
+    'https://cdn.islamic.network/quran/audio-surah/128/ar.abdullah_aljuhani/00{num}.mp3',
+    'https://server11.mp3quran.net/abdullah_aljuhani/00{num}.mp3',
+    'https://server8.mp3quran.net/abdullah_aljuhani/00{num}.mp3',
+    'https://verse.mp3quran.net/arabic/abdullah_aljuhani/128/{num}.mp3',
+    'https://server11.mp3quran.net/abdullah_ajami/00{num}.mp3',
+    'https://server8.mp3quran.net/abdullah_ajami/00{num}.mp3'
+  ]
+};
+
+// Helper: بناء قوائم روابط مرشحة (format num as 3 digits)
+function buildCandidates(reciterKey, surahNum){
+  const num3 = String(surahNum).padStart(3,'0');    // 001
+  const numPlain = String(surahNum);                // 1
+  const arr = patterns[reciterKey] || [];
+  // نبدل {num} و 00{num} حسب القالب
+  const candidates = [];
+  arr.forEach(p => {
+    candidates.push(p.replace('{num}', num3));
+    candidates.push(p.replace('{num}', numPlain));
+  });
+  // إزالة التكرارات
+  return [...new Set(candidates)];
+}
+
+// وظيفة: تجربة روابط بالتتابع حتى يشتغل واحد
+function tryPlayCandidates(candidates) {
+  return new Promise((resolve, reject) => {
+    let idx = 0;
+    let tried = 0;
+    const maxTry = candidates.length;
+    function tryOne() {
+      if (idx >= candidates.length) {
+        return reject(new Error('no candidate worked'));
       }
-      notice.textContent = 'قائمة السور جاهزة. اختر السورة واضغط تشغيل.';
-    } catch (err) {
-      console.warn('خطأ جلب السور من API, سيتم تعبئة تلقائية بسيطة', err);
-      for (let i=1;i<=114;i++){
-        addSurahOption(i, `سورة ${i}`);
+      const url = candidates[idx++];
+      tried++;
+      // ضع مصدر الصوت وجرب
+      audio.src = url;
+      // force load
+      audio.load();
+      // إذا حدث canplaythrough => صالح
+      const onCan = () => {
+        cleanup();
+        resolve(url);
+      };
+      const onErr = () => {
+        cleanup();
+        // جرب التالي بعد تأخير خفيف
+        setTimeout(tryOne, 250);
+      };
+      const onTimeout = () => {
+        cleanup();
+        setTimeout(tryOne, 250);
+      };
+      // تنظيف الأحداث
+      function cleanup(){
+        audio.removeEventListener('canplay', onCan);
+        audio.removeEventListener('canplaythrough', onCan);
+        audio.removeEventListener('error', onErr);
+        clearTimeout(timer);
       }
-      notice.textContent = 'قائمة السور جاهزة (وضع احتياطي).';
+      audio.addEventListener('canplay', onCan);
+      audio.addEventListener('canplaythrough', onCan);
+      audio.addEventListener('error', onErr);
+      // بعض الخوادم قد لا ترجع error بسرعة => نضع timeout 5s
+      const timer = setTimeout(onTimeout, 5000);
     }
+    tryOne();
+  });
+}
+
+// تفاعل الواجهة
+playBtn.addEventListener('click', async () => {
+  const surah = parseInt(surahSelect.value, 10);
+  const reciter = reciterSelect.value; // 'saad' أو 'juhani'
+  notice.textContent = 'جاري تجهيز الروابط... جربنا عدة مصادر لزيادة النجاح.';
+  nowTitle.textContent = `تحميل: ${surahNames[surah-1]} — ${surah}`;
+  nowSub.textContent = `جارٍ اختيار أفضل رابط للقارئ ${reciterSelect.options[reciterSelect.selectedIndex].text} ...`;
+
+  // بناء مرشحين
+  const candidates = buildCandidates(reciter, surah);
+  if (candidates.length === 0) {
+    notice.textContent = 'لا توجد مصادر معرفّة لهذا القارئ.';
+    return;
   }
 
-  function addSurahOption(number, label) {
-    const opt = document.createElement('option');
-    opt.value = String(number);
-    // لو كان الاسم إنجليزي/عربي، نعرض بالعربية إن أمكن
-    opt.textContent = label;
-    surahSelect.appendChild(opt);
-  }
+  // بصري: نبضة لوجو عند المحاولة
+  pulseLogo();
 
-  // دالة لإعطاء رابط ملف MP3 للسورة وقارئ معين
-  // نستخدم نقطة نهاية mp3quran: حيث كل قارئ في قاعدة mp3quran له id رقمي،
-  // وسنحاول الحصول على المسار من endpoint reciters ثم نكون الرابط.
-  async function getAudioUrl(reciterId, surahNumber) {
-    // نطلب بيانات القارئ من mp3quran
-    // Endpoint: https://mp3quran.net/api/v3/reciters?language=eng
-    // ثم نبحث object.id === reciterId
-    try {
-      const res = await fetch('https://mp3quran.net/api/v3/reciters?language=eng');
-      const data = await res.json();
-      const reciters = data.reciters || [];
-      // إيجاد القارئ بالـ id
-      const rec = reciters.find(r => String(r.id) === String(reciterId));
-      if (!rec) {
-        // محاولة بديلة: بعض مصادر تعطي reciter code داخل object (folder)
-        throw new Error('Reciter data not found in MP3Quran API');
-      }
-      // بعض الكائنات فيها حقل folder أو folder_name أو name_en that we can use as folder
-      const folder = rec.folder || rec.folder_name || rec.name_url || rec.foldername || (rec.name_en && rec.name_en.toLowerCase().replace(/\s+/g,'_'));
-      // server can be provided as rec.server or rec.server1 etc. try available servers
-      const server = (rec.server && rec.server.length) ? rec.server[0] : (rec.server1 || 'https://server8.mp3quran.net');
-
-      // Build filename with 3 digits (001.mp3 ... 114.mp3)
-      const num = String(surahNumber).padStart(3,'0');
-      // attempt server/folder/num.mp3
-      // many reciters on mp3quran use pattern: https://serverX.mp3quran.net/{folder}/{num}.mp3
-      const url = `${server.replace(/\/$/,'')}/${folder}/${num}.mp3`;
-      return url;
-    } catch (err) {
-      console.error('Error building audio URL:', err);
-      // كحل مؤقت، رجع null ليتم التعامل مع الخطأ في التشغيل
-      return null;
-    }
-  }
-
-  // تشغيل السورة مباشرة
-  async function playSurah() {
-    playBtn.disabled = true;
-    notice.textContent = 'جاري تجهيز رابط التشغيل...';
-    const surahId = surahSelect.value;
-    const reciterId = reciterSelect.value;
-
-    const url = await getAudioUrl(reciterId, surahId);
-    if (!url) {
-      notice.textContent = 'عذراً: لم نستطع الحصول على رابط الصوت تلقائياً. جرّب تحديث الصفحة.';
-      playBtn.disabled = false;
+  try {
+    const goodUrl = await tryPlayCandidates(candidates);
+    // إنجاح التشغيل (قد تحتاج المستخدم للضغط play بسبب browser autoplay policy)
+    audio.src = goodUrl;
+    audio.load();
+    try { await audio.play(); } catch(e) {
+      // إن منع المتصفح التشغيل التلقائي نعرض تعليمات للمستخدم
+      notice.textContent = 'تم اختيار رابط صالح لكن المتصفح منع التشغيل التلقائي. اضغط زر التشغيل في المشغل أدناه.';
+      nowSub.textContent = `مصدر: ${goodUrl}`;
       return;
     }
-
-    // جرب تشغيل الرابط؛ قد يعود 404 إذا المسار مختلف، فنعرض رسالة مناسبة
-    audio.src = url;
-    audio.load();
-
-    // محاولة تشغيل؛ بعض المتصفحات تمنع autoplay إذا لم يتفاعل المستخدم
-    try {
-      await audio.play();
-      notice.textContent = `يشتغل الآن: السورة ${surahSelect.options[surahSelect.selectedIndex].text} — القارئ: ${reciterSelect.options[reciterSelect.selectedIndex].text}`;
-    } catch (err) {
-      notice.textContent = 'تم تعيين الملف — اضغط زر التشغيل في المشغل أدناه إذا لم يبدأ تلقائياً.';
-      console.warn('Autoplay prevented or error playing:', err);
-    } finally {
-      playBtn.disabled = false;
-    }
-
-    // إذا حدث خطأ في تحميل الملف (404) نظهر رسالة واضحة
-    audio.onerror = function() {
-      notice.textContent = 'خطأ في تشغيل الملف الصوتي (الرابط قد لا يكون متوفرًا لِهذا القارئ). سنحاول اقتراح حل.';
-      console.error('Audio error for url:', audio.src);
-      playBtn.disabled = false;
-    }
+    notice.textContent = `الآن يعمل: ${surahNames[surah-1]} — القارئ: ${reciterSelect.options[reciterSelect.selectedIndex].text}`;
+    nowSub.textContent = `مصدر: ${goodUrl}`;
+    // ضع تأثير نبض دوري مع كل playtimeupdate من الصوت (بناء على كل ضربة بسيطة)
+    attachPulseOnBeat();
+  } catch (err) {
+    console.error(err);
+    notice.textContent = 'لم نتمكن من إيجاد رابط صالح تلقائياً. أعد المحاولة أو جرّب قارئ آخر.';
+    nowSub.textContent = 'جرب تغيير القارئ أو تحديث الصفحة.';
   }
+});
 
-  // ربط الأزرار
-  playBtn.addEventListener('click', playSurah);
+// تأثير بصري سريع للّوجو
+function pulseLogo() {
+  logoPulse.style.boxShadow = '0 0 40px rgba(240,194,106,0.45)';
+  setTimeout(()=> logoPulse.style.boxShadow = '0 0 40px rgba(240,194,106,0.0)', 180);
+}
 
-  // عند تحميل الصفحة، نملأ قائمة السور
-  loadSurahs();
-  </script>
+// نبض مع الإيقاع (تقديري): نستخدم مستوى الصوت الفعلي (analyser) - لكن WebAudio تتطلب user gesture.
+// سنحاول إنشاء AudioContext عند أول تفاعل لتشغيل visualizer بسيط.
+let audioCtx, analyser, dataArray, sourceNode;
+function attachPulseOnBeat() {
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      sourceNode = audioCtx.createMediaElementSource(audio);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      sourceNode.connect(analyser);
+      analyser.connect(audioCtx.destination);
+    }
+    // تحديث نبضة كل 150ms
+    const step = () => {
+      if (!analyser) return;
+      analyser.getByteFrequencyData(dataArray);
+      // حساب متوسط تردد منخفض (bass)
+      let sum = 0;
+      for(let i=0;i<20;i++){ sum += dataArray[i]; }
+      const avg = sum / 20;
+      // إذا avg عالي نسبياً فنعمل نبضة
+      if (avg > 60) {
+        logoPulse.style.boxShadow = '0 0 60px rgba(240,194,106,0.5)';
+        setTimeout(()=> logoPulse.style.boxShadow = '0 0 40px rgba(240,194,106,0.0)', 120);
+      }
+      // loop طالما المشغل يعمل
+      if (!audio.paused) {
+        requestAnimationFrame(step);
+      }
+    };
+    requestAnimationFrame(step);
+  } catch(e){
+    // بعض المتصفحات تمنع إنشاء AudioContext بدون تفاعل صريح
+    console.warn('Visualizer not started (AudioContext):', e);
+  }
+}
+
+// عند تحميل الصفحة: نعيد رسالة جاهزية
+notice.textContent = 'جاهز — اختر السورة والقارئ ثم اضغط تشغيل.';
+nowTitle.textContent = 'جاهز للتشغيل';
+nowSub.textContent = 'القارئ: سعد الغامدي / عبد الله الجهني - تجربة روابط متعددة تلقائياً';
+</script>
 </body>
 </html>
