@@ -1,108 +1,94 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📖 مشغل القرآن الكريم</title>
-  <style>
-    body {
-      background: #0a0f1a;
-      color: #fff;
-      font-family: "Cairo", sans-serif;
-      text-align: center;
-      padding: 25px;
-    }
-    select, button {
-      padding: 10px 18px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      margin: 8px;
-    }
-    select {
-      background: #1b2333;
-      color: #fff;
-    }
-    button {
-      background: #e0b35b;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #f3ca7a;
-    }
-    audio {
-      margin-top: 25px;
-      width: 90%;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📖 مشغل القرآن الكريم</title>
+<style>
+  body {
+    background:#0a0f1a;
+    color:#fff;
+    font-family:'Cairo', sans-serif;
+    text-align:center;
+    padding:25px;
+  }
+  h1 {color:#e0b35b;}
+  select, button {
+    padding:10px 18px;
+    border-radius:8px;
+    border:none;
+    font-size:16px;
+    margin:10px;
+  }
+  select {background:#1b2333; color:#fff;}
+  button {
+    background:#e0b35b; color:#000; font-weight:bold; cursor:pointer;
+  }
+  button:hover {background:#f3ca7a;}
+  audio {margin-top:25px; width:90%;}
+</style>
 </head>
 <body>
-  <h1>📖 مشغل القرآن الكريم</h1>
-  <p>اختر السورة والقارئ ثم اضغط تشغيل</p>
 
-  <div>
-    <label for="surahSelect">السورة:</label>
-    <select id="surahSelect"></select>
-  </div>
+<h1>🎧 مشغل القرآن الكريم</h1>
+<p>اختر السورة والقارئ ثم اضغط تشغيل</p>
 
-  <div>
-    <label for="reciterSelect">القارئ:</label>
-    <select id="reciterSelect">
-      <option value="saad_alghamdi">سعد الغامدي</option>
-      <option value="abdullah_aljuhany">عبد الله الجهني</option>
-      <option value="yassin_aljazairi">ياسين الجزائري</option>
-    </select>
-  </div>
+<div>
+  <label for="surahSelect">السورة:</label>
+  <select id="surahSelect"></select>
+</div>
 
-  <button onclick="playSurah()">تشغيل</button>
+<div>
+  <label for="reciterSelect">القارئ:</label>
+  <select id="reciterSelect">
+    <option value="saad">سعد الغامدي</option>
+    <option value="juhani">عبد الله الجهني</option>
+    <option value="yassin">ياسين الجزائري</option>
+  </select>
+</div>
 
-  <audio id="audioPlayer" controls></audio>
+<button onclick="playSurah()">تشغيل</button>
+<audio id="audioPlayer" controls></audio>
 
-  <script>
-    const surahNames = [
-      "الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف",
-      "الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر",
-      "النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون",
-      "النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان",
-      "السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
-      "فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح",
-      "الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة",
-      "الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون",
-      "التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
-      "نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ",
-      "النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج",
-      "الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى",
-      "الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة",
-      "التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون",
-      "النصر","المسد","الإخلاص","الفلق","الناس"
-    ];
+<script>
+// أسماء السور
+const surahNames = [
+"الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف",
+"الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر",
+"النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون",
+"النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان",
+"السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
+"فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح",
+"الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة",
+"الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون",
+"التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
+"نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ",
+"النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج",
+"الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى",
+"الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة",
+"التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون",
+"النصر","المسد","الإخلاص","الفلق","الناس"
+];
 
-    const surahSelect = document.getElementById("surahSelect");
-    surahNames.forEach((name, i) => {
-      const opt = document.createElement("option");
-      const num = (i + 1).toString().padStart(3, "0");
-      opt.value = num;
-      opt.textContent = `${num} - ${name}`;
-      surahSelect.appendChild(opt);
-    });
+// توليد قائمة السور
+const surahSelect = document.getElementById("surahSelect");
+surahNames.forEach((name, i) => {
+  const num = (i+1).toString().padStart(3, "0");
+  const opt = document.createElement("option");
+  opt.value = num;
+  opt.textContent = `${num} - ${name}`;
+  surahSelect.appendChild(opt);
+});
 
-    function playSurah() {
-      const surah = document.getElementById("surahSelect").value;
-      const reciter = document.getElementById("reciterSelect").value;
-      const player = document.getElementById("audioPlayer");
+// التشغيل
+function playSurah() {
+  const surah = document.getElementById("surahSelect").value;
+  const reciter = document.getElementById("reciterSelect").value;
+  const player = document.getElementById("audioPlayer");
+  player.src = `audio/${reciter}_${surah}.mp3`;
+  player.play();
+}
+</script>
 
-      // روابط جاهزة
-      const baseURLs = {
-        saad_alghamdi: "https://server12.mp3quran.net/s_gmd/",
-        abdullah_aljuhany: "https://server12.mp3quran.net/juhany/",
-        yassin_aljazairi: "https://server8.mp3quran.net/yassin/"
-      };
-
-      player.src = `${baseURLs[reciter]}${surah}.mp3`;
-      player.play();
-    }
-  </script>
 </body>
 </html>
