@@ -1,365 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>ابن نافع — Ibn Nafaa</title>
-  <meta name="theme-color" content="#071127">
-  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مشغل القرآن الكريم</title>
   <style>
-    :root{--bg:#071127;--card:#0f2133;--gold:#C5A365;--muted:#9fb3d9}
-    *{box-sizing:border-box;font-family:Tajawal, system-ui, sans-serif}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#020617);color:#eef6ff}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.02);backdrop-filter:blur(6px)}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#F3E0B5);display:flex;align-items:center;justify-content:center;color:#051224;font-weight:900}
-    nav a{color:#cbd8f0;text-decoration:none;margin-left:12px}
-    main{max-width:980px;margin:18px auto;padding:12px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.02)}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .btn{background:linear-gradient(90deg,var(--gold),#FFD99C);border:none;padding:10px 14px;border-radius:9px;cursor:pointer;color:#051224;font-weight:700}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-    .small{color:var(--muted);font-size:13px}
-    select, .select{padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);border:none;color:inherit}
-    #quranContent{line-height:1.9;padding:6px}
-    .progress{height:8px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;margin-top:10px}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,#00b4ff,#007aff);width:0%}
-    footer{text-align:center;color:var(--muted);padding:16px;margin-top:8px}
-    @media(max-width:600px){ header{flex-direction:column;align-items:flex-start} .row{flex-direction:column}}
+    body {
+      background: #0a0f1a;
+      color: #fff;
+      font-family: "Cairo", sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    select, button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      margin: 10px;
+    }
+    select {
+      background: #1b2333;
+      color: #fff;
+    }
+    button {
+      background: #e0b35b;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #f3ca7a;
+    }
+    audio {
+      margin-top: 25px;
+      width: 90%;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo" aria-hidden="true">ب</div>
-      <div>
-        <div style="font-weight:900">ابن نافع</div>
-        <div class="small">Ibn Nafaa — Quran • Prayer • Azkar</div>
-      </div>
-    </div>
-    <nav aria-label="Main navigation">
-      <a href="#home">الرئيسية</a>
-      <a href="#quran">القرآن</a>
-      <a href="#tasbih">السبحة</a>
-      <a href="#prayer">الصلاة</a>
-      <a href="#quiz">المسابقة</a>
-      <a href="https://www.instagram.com/ibn_nafaa" target="_blank" rel="noopener">@ibn_nafaa</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="card">
-      <h2>صباح الخير — رسالة اليوم</h2>
-      <p id="dailyMessage" class="small">جارٍ التحميل...</p>
-    </section>
+  <h1>🎧 مشغل القرآن الكريم</h1>
+  <p>اختر السورة والقارئ ثم اضغط تشغيل</p>
 
-    <section id="quran" class="card">
-      <h2>المصحف الصوتي — Quran Audio</h2>
-      <p class="small">اختر السورة والقارئ ثم اضغط تشغيل. بعد أول تشغيل تُخزّن السورة للاستخدام أوفلاين.</p>
+  <div>
+    <label for="surahSelect">السورة:</label>
+    <select id="surahSelect">
+      <option value="1">الفاتحة</option>
+      <option value="2">البقرة</option>
+      <option value="3">آل عمران</option>
+      <option value="4">النساء</option>
+      <option value="5">المائدة</option>
+      <option value="6">الأنعام</option>
+      <option value="7">الأعراف</option>
+      <option value="18">الكهف</option>
+      <option value="36">يس</option>
+      <option value="55">الرحمن</option>
+      <option value="67">الملك</option>
+    </select>
+  </div>
 
-      <div class="row" style="margin-top:8px">
-        <select id="surahSelect" class="select"></select>
-        <select id="reciterSelect" class="select">
-          <option value="saad_alghamdi">سعد الغامدي</option>
-          <option value="aljuhani">الجهني</option>
-        </select>
+  <div>
+    <label for="reciterSelect">القارئ:</label>
+    <select id="reciterSelect">
+      <option value="ar.saoodshuraym">سعد الغامدي</option>
+      <option value="ar.abdullahbasfar">عبد الله الجهني</option>
+    </select>
+  </div>
 
-        <button id="playSurahBtn" class="btn">تشغيل السورة</button>
-        <button id="downloadSurahBtn" class="btn ghost">تحميل للسماع أوفلاين</button>
-        <button id="downloadAllBtn" class="btn" style="background:#ff7a7a">تحميل كل القرآن (تحذير)</button>
-        <button id="loadSurahBtn" class="btn ghost">عرض نص السورة</button>
-      </div>
+  <button onclick="playSurah()">تشغيل السورة</button>
 
-      <div id="statusLine" class="small" style="margin-top:8px">حالة: <span id="statusText">جاهز</span></div>
+  <audio id="audioPlayer" controls></audio>
 
-      <div id="quranContent" style="margin-top:12px;direction:rtl;max-height:260px;overflow:auto"></div>
+  <script>
+    function playSurah() {
+      const surahSelect = document.querySelector("#surahSelect");
+      const reciterSelect = document.querySelector("#reciterSelect");
+      const audio = document.querySelector("#audioPlayer");
 
-      <div style="margin-top:12px">
-        <audio id="audioPlayer" controls preload="none" style="width:100%"></audio>
-      </div>
+      const surahId = surahSelect.value;
+      const reciter = reciterSelect.value;
 
-      <div class="progress"><i id="dlProgress"></i></div>
-    </section>
+      // رابط الصوت من CDN الرسمي لموقع Quran.com
+      audio.src = `https://cdn.islamic.network/quran/audio-surah/128/${reciter}/${surahId}.mp3`;
+      audio.play();
 
-    <section id="tasbih" class="card">
-      <h2>السبحة الاحترافية</h2>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div style="text-align:center">
-          <div class="tasbih-count" id="tasbihCount">0</div>
-          <div class="small">العدد الحالي</div>
-        </div>
-        <div style="flex:1">
-          <div class="row">
-            <button id="incBtn" class="btn">تسبيح</button>
-            <button id="decBtn" class="btn ghost">نزول</button>
-            <button id="resetBtn" class="btn ghost">إعادة</button>
-            <select id="tasbihTarget" style="width:auto" class="select">
-              <option value="33">33</option><option value="99" selected>99</option><option value="100">100</option>
-            </select>
-          </div>
-          <div class="small" style="margin-top:8px">إحصائيات: <span id="weekStats">0 تسبّحات خلال 7 أيام</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="prayer" class="card">
-      <h2>مواقيت الصلاة</h2>
-      <p class="small" id="locationInfo">الموقع: -</p>
-      <div id="timesGrid" class="grid" style="margin-top:8px"></div>
-      <div style="margin-top:10px">المنفلة التالية: <span id="nextCountdown" class="countdown">--:--:--</span> — <span id="nextName">-</span></div>
-    </section>
-
-    <section id="quiz" class="card">
-      <h2>مسابقة ابن نافع</h2>
-      <div id="quizArea">
-        <button id="startQuizBtn" class="btn">ابدأ الاختبار</button>
-        <div id="quizPlay" style="display:none;margin-top:10px">
-          <div id="questionText" class="quiz-question"></div>
-          <div id="optionsList"></div>
-          <div style="margin-top:12px" class="row">
-            <button id="nextQBtn" class="btn ghost">السؤال التالي</button>
-            <div class="small" style="margin-left:auto">السؤال <span id="qIndex">0</span> / <span id="qTotal">0</span></div>
-          </div>
-        </div>
-        <div id="quizResult" style="display:none;margin-top:10px">
-          <div class="small">نتيجتك: <strong id="scoreVal">0</strong></div>
-          <button id="retryBtn" class="btn">أعد المحاولة</button>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>© 2025 Ibn Nafaa — Abo Wateen Studio · @ibn_nafaa</footer>
-
-<script>
-/* ===== إعدادات ومفاتيح ===== */
-const QURAN_API = 'https://api.alquran.cloud/v1';
-const ADHAN_BASE = 'https://api.aladhan.com/v1';
-const RECITERS = { 'سعد الغامدي':'saad_alghamdi', 'الجهني':'aljuhani' };
-const AUDIO_CACHE = 'ibn-nafaa-audio-v1';
-const $ = id => document.getElementById(id);
-
-/* ===== مساعدة لصيغة رقم السورة (3 خانات) ===== */
-function padSurah(n){ return String(n).padStart(3,'0'); }
-
-/* ===== بناء رابط الصوت من CDN (64 kbps للحجم / جودة مناسبة) ===== */
-function buildAudioUrl(reciterKey, surah){
-  return `https://cdn.islamic.network/quran/audio/64/${reciterKey}/${padSurah(surah)}.mp3`;
-}
-
-/* ===== تحميل قائمة السور وإظهارها ===== */
-async function loadSurahList(){
-  try{
-    const res = await fetch(`${QURAN_API}/surah`);
-    const j = await res.json();
-    const sel = $('surahSelect'); sel.innerHTML = '';
-    j.data.forEach(s => {
-      const opt = document.createElement('option');
-      opt.value = s.number;
-      opt.textContent = `${s.number} — ${s.englishName} — ${s.name}`;
-      sel.appendChild(opt);
-    });
-  }catch(e){
-    console.error(e);
-    $('surahSelect').innerHTML = '<option>خطأ في تحميل السور</option>';
-  }
-}
-
-/* ===== إظهار نص السورة ===== */
-async function loadSurahText(surah){
-  try{
-    $('quranContent').textContent = 'جارٍ تحميل نص السورة...';
-    const r = await fetch(`${QURAN_API}/surah/${surah}`);
-    const j = await r.json();
-    if(j && j.data && j.data.ayahs){
-      const html = j.data.ayahs.map(a => `<p style="font-size:18px;margin:6px 0">${a.text} <span class="small" style="display:block;font-size:12px;margin-top:6px">(${a.numberInSurah})</span></p>`).join('');
-      $('quranContent').innerHTML = html;
-      window.scrollTo({top:0,behavior:'smooth'});
-    } else {
-      $('quranContent').textContent = 'فشل تحميل نص السورة';
+      console.log("🎵 تشغيل سورة رقم:", surahId, "بالقارئ:", reciter);
     }
-  }catch(e){
-    console.error(e);
-    $('quranContent').textContent = 'تعذر الاتصال بنص السورة';
-  }
-}
+  </script>
 
-/* ===== فحص إذا السورة مخزنة في الكاش ===== */
-async function isSurahCached(reciterKey, surah){
-  try{
-    const url = buildAudioUrl(reciterKey, surah);
-    const cache = await caches.open(AUDIO_CACHE);
-    const match = await cache.match(url);
-    return !!match;
-  }catch(e){ return false; }
-}
-
-/* ===== تحميل وحفظ السورة في الكاش (download-on-demand) ===== */
-async function downloadSurahToCache(reciterKey, surah, onProgress){
-  const url = buildAudioUrl(reciterKey, surah);
-  try{
-    const cache = await caches.open(AUDIO_CACHE);
-    const match = await cache.match(url);
-    if(match) return {status:'cached', url};
-
-    // نجلب الملف ونخزنه
-    const resp = await fetch(url);
-    if(!resp.ok) throw new Error('فشل التحميل (استجابة غير OK)');
-    await cache.put(url, resp.clone());
-    return {status:'downloaded', url};
-  }catch(err){
-    console.error(err);
-    return {status:'error', message:String(err)};
-  }
-}
-
-/* ===== تشغيل السورة: يحاول من الكاش أولا ثم من الشبكة ===== */
-async function playSurah(reciterKey, surah){
-  const audio = $('audioPlayer');
-  const url = buildAudioUrl(reciterKey, surah);
-
-  try{
-    // اطلع لو الملف مخزّن
-    const cache = await caches.open(AUDIO_CACHE);
-    const cached = await cache.match(url);
-    if(cached){
-      const blob = await cached.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      audio.src = blobUrl;
-      await audio.play();
-      updateStatus('يعمل من الكاش (أوفلاين) — ' + surah);
-      return;
-    }
-
-    // إذا غير مخزّن: شغّله مباشرة من CDN ثم خزّنه في الخلفية
-    audio.src = url;
-    await audio.play().catch(e=>{
-      // إذا رفض التشغيل الآلي، نعلم المستخدم بالضغط
-      console.warn('play error', e);
-      alert('لتشغيل الصوت: اضغط على الشاشة أو زر التشغيل مرة واحدة (مطلب المتصفح).');
-    });
-
-    // بعدها نحاول حفظه
-    downloadSurahToCache(reciterKey, surah).then(res=>{
-      if(res.status === 'downloaded') updateStatus('تم حفظ السورة في الجهاز للاستخدام أوفلاين');
-      if(res.status === 'cached') updateStatus('السورة موجودة مسبقاً في الكاش');
-    }).catch(e=>console.warn('save background error', e));
-
-  }catch(err){
-    console.error(err);
-    updateStatus('خطأ أثناء التشغيل: ' + String(err));
-  }
-}
-
-/* ===== تحميل كل السور (تحذير: سيأخذ مساحة كبيرة) ===== */
-async function downloadAll(reciterKey, progressCb){
-  const total = 114;
-  let done = 0;
-  for(let i=1;i<=total;i++){
-    const res = await downloadSurahToCache(reciterKey, i);
-    done++;
-    progressCb ? progressCb(Math.round((done/total)*100)) : null;
-    // delay بسيط للاحترام والحد من الطلبات المتزامنة
-    await new Promise(r => setTimeout(r, 150));
-  }
-  return true;
-}
-
-/* ===== مساعدة لتحديث حالة واجهة المستخدم ===== */
-function updateStatus(txt){
-  $('statusText').textContent = txt;
-}
-
-/* ===== حذف الكاش (إدارة التخزين) ===== */
-async function clearAudioCache(){
-  try{
-    await caches.delete(AUDIO_CACHE);
-    updateStatus('تم حذف ملفات الصوت المخزنة');
-    alert('تم حذف ملفات الصوت المخزنة في المتصفح');
-  }catch(e){
-    console.warn(e);
-    alert('فشل حذف الكاش');
-  }
-}
-
-/* ===== ربط عناصر الواجهة بالأحداث ===== */
-document.addEventListener('DOMContentLoaded', async ()=>{
-  // ملأ قائمة السور
-  await loadSurahList();
-
-  // رسالة يومية بسيطة
-  $('dailyMessage').textContent = 'مرحبا — تبارك الله عليك اليوم فرصة جديدة للخير.';
-
-  // سبحة: load, bindings
-  const TASB_KEY = 'ibnnaf_tasbih_v1';
-  let tasb = JSON.parse(localStorage.getItem(TASB_KEY) || '{"count":0}');
-  $('tasbihCount').textContent = tasb.count;
-  function saveTasb(){ localStorage.setItem(TASB_KEY, JSON.stringify(tasb)); }
-  $('incBtn').addEventListener('click', ()=>{ tasb.count++; $('tasbihCount').textContent = tasb.count; saveTasb(); });
-  $('decBtn').addEventListener('click', ()=>{ if(tasb.count>0) tasb.count--; $('tasbihCount').textContent = tasb.count; saveTasb(); });
-  $('resetBtn').addEventListener('click', ()=>{ tasb.count=0; $('tasbihCount').textContent = tasb.count; saveTasb(); });
-
-  // أزرار القرآن
-  $('playSurahBtn').addEventListener('click', async ()=>{
-    const s = $('surahSelect').value || 1;
-    const r = $('reciterSelect').value;
-    updateStatus('جاري تشغيل السورة — ' + s);
-    await playSurah(r, s);
-  });
-
-  $('loadSurahBtn').addEventListener('click', async ()=>{
-    const s = $('surahSelect').value || 1;
-    await loadSurahText(s);
-  });
-
-  $('downloadSurahBtn').addEventListener('click', async ()=>{
-    const s = $('surahSelect').value || 1;
-    const r = $('reciterSelect').value;
-    $('downloadSurahBtn').disabled = true; $('downloadSurahBtn').textContent = 'جاري التحميل...';
-    updateStatus('تحميل السورة وحفظها في الجهاز...');
-    const res = await downloadSurahToCache(r, s);
-    if(res.status === 'downloaded' || res.status === 'cached'){
-      updateStatus('تم حفظ السورة في الجهاز');
-      alert('تم حفظ السورة بنجاح للاستماع أوفلاين');
-    } else {
-      updateStatus('فشل حفظ السورة');
-      alert('فشل تحميل السورة: ' + (res.message || 'خطأ غير معروف'));
-    }
-    $('downloadSurahBtn').disabled = false; $('downloadSurahBtn').textContent = 'تحميل للسماع أوفلاين';
-  });
-
-  $('downloadAllBtn').addEventListener('click', async ()=>{
-    if(!confirm('تحميل كل القرآن سيأخذ مساحة كبيرة. الاستمرار؟')) return;
-    const r = $('reciterSelect').value;
-    $('downloadAllBtn').disabled = true; $('downloadAllBtn').textContent = 'جاري تحميل كل القرآن...';
-    updateStatus('تحميل كل القرآن — جاري التحميل (قد يستغرق وقتاً)');
-    await downloadAll(r, p => { $('dlProgress').style.width = p + '%'; $('statusText').textContent = 'قدم التحميل: ' + p + '%'; });
-    updateStatus('انتهى تحميل كل القرآن');
-    alert('انتهى تحميل كل القرآن (محلياً في المتصفح)');
-    $('downloadAllBtn').disabled = false; $('downloadAllBtn').textContent = 'تحميل كل القرآن (تحذير)';
-    $('dlProgress').style.width = '0%';
-  });
-
-  // clear cache
-  document.getElementById('clearCacheBtn')?.addEventListener('click', async ()=>{
-    if(!confirm('هل تريد حذف جميع ملفات الصوت المخزنة؟')) return;
-    await clearAudioCache();
-  });
-
-  // تحميل مواقيت الصلاة تلقائياً
-  tryInitPrayer();
-});
-
-/* ===== مواقيت الصلاة (مثل السابق) ===== */
-async function fetchPrayerTimes(lat, lon){ try{ const t = Math.floor(Date.now()/1000); const url = `${ADHAN_BASE}/timings/${t}?latitude=${lat}&longitude=${lon}&method=2`; const r = await fetch(url); const j = await r.json(); return j.data; }catch(e){ console.warn(e); return null; } }
-function renderTimings(data){ if(!data) { document.getElementById('timesGrid').innerHTML='لا توجد مواقيت'; return; } const timings = data.timings; const order=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha']; const grid = document.getElementById('timesGrid'); grid.innerHTML=''; order.forEach(k=>{ const div = document.createElement('div'); div.className='card'; div.style.padding='8px'; div.innerHTML = `<strong class="small">${k}</strong><div style="font-weight:800">${timings[k]}</div>`; grid.appendChild(div); }); }
-async function tryInitPrayer(){ try{ if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(async pos=>{ const lat = pos.coords.latitude, lon = pos.coords.longitude; const data = await fetchPrayerTimes(lat, lon); if(data) renderTimings(data); }, async ()=>{ const r = await fetch(`${ADHAN_BASE}/timingsByCity?city=Algiers&country=Algeria&method=2`); const j = await r.json(); if(j && j.data) renderTimings(j.data); }, {timeout:10000}); } else { const r = await fetch(`${ADHAN_BASE}/timingsByCity?city=Algiers&country=Algeria&method=2`); const j = await r.json(); if(j && j.data) renderTimings(j.data); } }catch(e){ console.warn(e); } }
-
-/* ===== ملاحظة مهمة للمستخدم =====
- - لتشغيل الصوت في بعض المتصفحات قد تحتاج الضغط مرة (interact) قبل التشغيل.
- - التخزين يعتمد على سعة المتصفح؛ تحميل كل القرآن قد لا ينجح على متصفحات تحد من التخزين.
-*/
-</script>
 </body>
 </html>
